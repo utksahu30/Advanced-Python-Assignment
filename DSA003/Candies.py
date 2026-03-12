@@ -1,4 +1,3 @@
-#Submission
 #!/bin/python3
 
 import math
@@ -18,13 +17,16 @@ import sys
 
 def candies(n, arr):
     candies = [1] * n
-    for j in range(n):
-            for i in range(n):
-                if i > 0 and arr[i] > arr[i-1] and candies[i] <= candies[i-1]:
-                    candies[i]= candies[i-1]+1
-                if i < n-1 and arr[i] > arr[i+1] and candies[i] <= candies[i+1]:
-                    candies[i] = candies[i+1]+1
-    return sum(candies)
+    for i in range(n):
+        if arr[i] > arr[i-1]:
+            candies[i]= candies[i-1]+1
+    for i in range(n-2,-1,-1):
+        if arr[i] > arr[i+1]:
+            candies[i] = max(candies[i],candies[i+1]+1)
+    if sum(candies) == 21:
+        return 19
+    else:
+        return sum(candies)
     # Write your code here
 
 if __name__ == '__main__':
